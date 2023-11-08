@@ -4,28 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pokemon  %></title>
+
+<!-- there is a way to make this one line work but for now i am writing in seperate tag -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body{
+        background-color: <%= bgcolor %>;
+    }
+    /* Center the content in the top div */
+    #topDiv {
+        display: contents;
+        justify-content: center;
+        align-items: center;
+        height: 50vh; /* Adjust the height as needed */
+        background-color: lightgray; /* Background color for the top div */
+    }
+    
+    /* Style the bottom div as a rectangle with curved corners and red border */
+    #bottomDiv {
+    display: flex;
+    background-color: white; /* Background color for the bottom div */
+    border: 4px solid red; /* Thick red border */
+    border-radius: 20px; /* Curved corners */
+    padding: 20px; /* Add padding as needed */
+    margin: 10px; /* Add margin as needed */
+    }  
+
+    .left {
+    flex: 1;
+    width: 33.33%; /* Reserve 33.33% of the width for the first div */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .right{
+        flex: 2;   
+    }
+    </style>
+    
 </head>
-<style>
-    body{
-    background-color: <%= bgcolor %>;
-}
-</style>
+
 <body>
-    <div class="head">
+    <div class="head" id="topDiv">
     <h1> Know all about <%= pokemon  %> here. </h1>
     </div>
-    <div class="content">
-        <div class="photo">
+    <div class="content" id="bottomDiv">
+        <div class="left">
             <h2>Pokedex #<%=id%></h2>
             <!-- can i add an AI generated image here -->
-            <img/> 
+            <img src="dsf.png"/> 
         </div>
-        <div class="information">
+        <div class="right">
             <h2><%= pokemon  %></h2>
             <div class="main-details">
                 <h1>Types</h1>
                 <% type.forEach(function (item, index) { %>     
-                    <pre><%= item["type"]["name"] %> </pre>
+                    <button style="background-color: <%= mapTypeToColor(item["type"]["name"]) %>" ><%= item["type"]["name"] %> </button>
                 <% })%>                
             </div>
             <div class="main-details">

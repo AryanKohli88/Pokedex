@@ -31,7 +31,7 @@ var num; //response.data.id
 
 app.post("/submit", (req,res)=>{
     // console.log(req.body);
-    pok = req.body["pokemon"];
+    pok = req.body["pokemon"].toLowerCase();
     console.log(pok);
     res.redirect("/info");
 });
@@ -51,10 +51,11 @@ app.get("/info", async (req, res)=>{
             type: types,
             colortype: colortype,
             ingames: games,
-            id: num
+            id: num,
+            mapTypeToColor : mapTypeToColor
          }); // this is causing error
-        // console.log(response);  
-        console.log(games);  
+        console.log(colortype);  
+        // console.log(games);  
 
     } catch(er){
 
@@ -78,14 +79,14 @@ const typeColors = {
     grass: 'green',
     fighting: 'red',
     flying: 'skyblue',
-    poison: 'purple',
+    poison: 'rgb(210, 20, 202)', // MAKE ALL LIKE THIS ONLY
     ground: 'saddlebrown',
     rock: 'sienna',
     bug: 'green',
     ghost: 'indigo',
     steel: 'slategray',
     electric: 'yellow',
-    psychic: 'pink',
+    psychic: 'lightblue',
     ice: 'lightcyan',
     dragon: 'darkslateblue',
     dark: 'darkslategray',
