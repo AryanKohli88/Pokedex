@@ -5,20 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pokemon  %></title>
 </head>
+<style>
+    body{
+    background-color: <%= bgcolor %>;
+}
+</style>
 <body>
     <div class="head">
     <h1> Know all about <%= pokemon  %> here. </h1>
     </div>
     <div class="content">
         <div class="photo">
+            <h2>Pokedex #<%=id%></h2>
             <!-- can i add an AI generated image here -->
             <img/> 
-
         </div>
         <div class="information">
             <h2><%= pokemon  %></h2>
             <div class="main-details">
-                
+                <h1>Types</h1>
+                <% type.forEach(function (item, index) { %>     
+                    <pre><%= item["type"]["name"] %> </pre>
+                <% })%>                
+            </div>
+            <div class="main-details">
+                <h1>Games</h1>
+                <% ingames.forEach(function (item, index) { %>     
+                    <pre><%= item["version"]["name"] %> </pre>
+                <% })%>                
             </div>
         </div>
     </div>
