@@ -28,7 +28,6 @@ var colortype;
 var games; // response.data.game_indices[0]["version"]["name"]; gives name of one game you can find it in 
 var num; //response.data.id
 
-
 app.post("/submit", (req,res)=>{
     // console.log(req.body);
     pok = req.body["pokemon"].toLowerCase();
@@ -95,6 +94,9 @@ const typeColors = {
 // Check if the type exists in the typeColors; if not, return a default color
 return typeColors[type] || 'gray';
 }
+
+
+
 
 app.listen(port,()=>{
     console.log(`Listening at port ${port}`);

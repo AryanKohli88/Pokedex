@@ -6,11 +6,38 @@
     <title>Pokedex</title>
 </head>
 <body class="body" id="body">
+    <div id="transition"></div>
     <h1>Welcome to Pokedex</h1>
-    <form action="/submit" method="POST" class="form">
-    <label>Name: </label>
-    <input type="text" name="pokemon" class="text-box" required>
-    <input type="submit" class="btn" required>
+    <form action="/submit" method="POST" class="form" id="pokemonForm" onsubmit="return playAnimation()">
+        <label>Name: </label>
+        <input type="text" name="pokemon" class="text-box" required>
+        <input type="submit" class="btn" required>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+<!-- GOOD -->
+    <script>
+
+        // document.getElementById("pokemonForm").addEventListener("submit", function(event) {
+        //     // event.preventDefault(); // Prevent the default form submission
+        //     setTimeout(function() {
+        //         // Continue with the form submission
+        //         document.getElementById("pokemonForm").submit();
+        //     },3000);
+        //     // playAnimation();
+        //     // res.send("/submit");
+        // });
+
+        function playAnimation() {
+        var animation;        
+        animation = bodymovin.loadAnimation({
+            container: document.getElementById("transition"),
+            path: 'animation/transition.json',
+            render: 'svg',
+            loop: false,
+            autoplay: true,
+            name: "trans"           
+        });
+        }
+    </script>
 </body>
 </html>
