@@ -17,15 +17,15 @@
 <!-- GOOD -->
     <script>
 
-        // document.getElementById("pokemonForm").addEventListener("submit", function(event) {
-        //     // event.preventDefault(); // Prevent the default form submission
-        //     setTimeout(function() {
-        //         // Continue with the form submission
-        //         document.getElementById("pokemonForm").submit();
-        //     },3000);
-        //     // playAnimation();
-        //     // res.send("/submit");
-        // });
+        document.getElementById("pokemonForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // setTimeout(function() {
+            //     // Continue with the form submission
+            //     document.getElementById("pokemonForm").submit();
+            // },3000);
+            playAnimation();
+            // res.send("/submit");
+        });
 
         function playAnimation() {
         var animation;        
