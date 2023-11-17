@@ -8,6 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static("public"));
 import axios from "axios";
 import bodyparser from "body-parser";
+import path from "path";
 import { error } from "console";
 app.use(bodyparser.urlencoded(
     {
@@ -34,7 +35,7 @@ app.post("/submit", (req,res)=>{
     console.log(pok);
     res.redirect("/info");
 });
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.get("/info", async (req, res)=>{
     try{
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pok}`);
@@ -74,18 +75,18 @@ function mapTypeToColor(type) {
 const typeColors = {
     normal: 'gray',
     fire: 'orangered',
-    water: 'blue',
+    water: 'lightblue',
     grass: 'green',
     fighting: 'red',
     flying: 'skyblue',
-    poison: 'rgb(210, 20, 202)', // MAKE ALL LIKE THIS ONLY
+    poison: 'rgb(210, 20, 102)', // MAKE ALL LIKE THIS ONLY
     ground: 'saddlebrown',
     rock: 'sienna',
     bug: 'green',
     ghost: 'indigo',
     steel: 'slategray',
     electric: 'yellow',
-    psychic: 'lightblue',
+    psychic: 'lightpink',
     ice: 'lightcyan',
     dragon: 'darkslateblue',
     dark: 'darkslategray',

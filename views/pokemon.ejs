@@ -11,37 +11,7 @@
     <style>
         body{
         background-color: <%= bgcolor %>;
-    }
-    
-    #topDiv {
-    height: 10vh; 
-    background-color: lightgray;
-    font-family: "Lucida Console", "Courier New", monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
-
-    #bottomDiv {
-    display: flex;
-    background-color: white; 
-    border: 4px solid red; 
-    border-radius: 20px; 
-    padding: 20px;
-    margin: 10px;
-    }  
-
-    .left {
-    flex: 1;
-    width: 33.33%; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
-
-    .right{
-        flex: 2;   
-    }
+        }
     </style>
     
 </head>
@@ -67,7 +37,9 @@
         <div class="left">
             <h2>Pokedex #<%=id%></h2>
             <!-- can i add an AI generated image here -->
-            <img src="dsf.png"/> 
+            <!-- <img src="dsf.png"/>  -->
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+            <dotlottie-player src="https://lottie.host/9ea9d564-d16e-414e-89a7-bcd541df5620/EhXOtyiILh.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay class="lottiePlayer"></dotlottie-player>
         </div>
         <div class="right">
             <h2><%= pokemon  %></h2>
@@ -78,7 +50,7 @@
                 <% })%>                
             </div>
             <div class="main-details">
-                <h1>Games</h1>
+                <h1>Games were you can find <%= pokemon %> : </h1>
                 <% ingames.forEach(function (item, index) { %>     
                     <pre><%= item["version"]["name"] %> </pre>
                 <% })%>                
