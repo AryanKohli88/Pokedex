@@ -34,29 +34,38 @@
     <h1> Know all about <%= pokemon  %> here. </h1>
     </div>
     <div class="content" id="bottomDiv">
-        <div class="left">
-            <h2>Pokedex #<%=id%></h2>
-            <!-- can i add an AI generated image here -->
-            <!-- <img src="dsf.png"/>  -->
-            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-            <dotlottie-player src="https://lottie.host/9ea9d564-d16e-414e-89a7-bcd541df5620/EhXOtyiILh.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay class="lottiePlayer"></dotlottie-player>
-        </div>
-        <div class="right">
-            <h2><%= pokemon  %></h2>
-            <div class="main-details">
-                <h1>Pokemon Type</h1>
-                <% type.forEach(function (item, index) { %>     
-                    <button style="background-color: <%= mapTypeToColor(item["type"]["name"]) %>" ><%= item["type"]["name"] %> </button>
-                <% })%>                
+        <!-- <div  id="up"> -->
+            <div class="left">
+                <h2>Pokedex #<%=id%></h2>
+                <!-- can i add an AI generated image here -->
+                <!-- <img src="dsf.png"/>  -->
+                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+                <dotlottie-player src="https://lottie.host/9ea9d564-d16e-414e-89a7-bcd541df5620/EhXOtyiILh.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay class="lottiePlayer"></dotlottie-player>
             </div>
-            <h1>Games where you can find <%= pokemon %> : </h1>
-            <div class="main-details">
-                <% ingames.forEach(function (item, index) { %>     
-                  <div class="games">  <pre><%= item["version"]["name"] %> </pre> </div>
-                <% })%>                
+            <div class="right">
+                <h2><%= pokemon  %></h2>
+                <div class="main-details">
+                    <h1>Pokemon Type</h1>
+                    <% type.forEach(function (item, index) { %>     
+                        <button style="background-color: <%= mapTypeToColor(item["type"]["name"]) %>" ><%= item["type"]["name"] %> </button>
+                    <% })%>                
+                </div>
+                <h1>Games where you can find <%= pokemon %> : </h1>
+                <div class="main-details">
+                    <% ingames.forEach(function (item, index) { %>     
+                    <div class="games">  <pre><%= item["version"]["name"] %> </pre> </div>
+                    <% })%>                
+                </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
+        <div id="down">
+            <ul>
+            <li><a href=<%= q1 %> target="_blank"> First Appearance </a> <br>
+            <li><a href=<%= q2 %> target="_blank"> First Trainer </a><br>
+            <li><a href=<%= q3 %> target="_blank"> Evolution </a><br>
+            </ul>
+        </div>
 
 </body>
 </html>

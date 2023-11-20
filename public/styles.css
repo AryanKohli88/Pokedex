@@ -1,6 +1,7 @@
 #topDiv {
 height: 10vh; 
-background-color: lightgray;
+border: 4px solid black; 
+background-color: rgb(255, 255, 255);
 font-family: "Lucida Console", "Courier New", monospace;
 display: flex;
 justify-content: center;
@@ -41,6 +42,19 @@ width: 33.33%;
 display: flex;
 flex-direction: column;
 align-items: center;
+}
+
+#down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh; /* Adjust the height based on your requirements */
+  font-size: 21px; /* Adjust the font size as needed */
+}
+
+#down a {
+  font-size: 18px; /* Adjust the font size for links as needed */
+  font-family: sans-serif; /* Replace 'Your Chosen Font' with the desired font family */
 }
 
 .right{
