@@ -9,13 +9,15 @@ app.use(express.static("public"));
 import axios from "axios";
 import bodyparser from "body-parser";
 import path from "path";
+import { config } from "dotenv";
+config()
 import { error } from "console";
 app.use(bodyparser.urlencoded(
     {
       extended: true
     }
 ));
-  
+
 
 app.get("/", (req,res)=>{
     // res.render("pokemon.ejs", {pokemon : req.body["pokemon"]}); // this is causing error
@@ -95,9 +97,6 @@ const typeColors = {
 // Check if the type exists in the typeColors; if not, return a default color
 return typeColors[type] || 'gray';
 }
-
-
-
 
 app.listen(port,()=>{
     console.log(`Listening at port ${port}`);

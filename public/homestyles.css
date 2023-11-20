@@ -6,6 +6,9 @@ h1 {
     margin-top: 25%;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
 .form {
     margin-top: 1%;
     text-align: center;

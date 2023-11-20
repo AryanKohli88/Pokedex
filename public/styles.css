@@ -6,6 +6,25 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
+h1{
+  font-family: 'Press Start 2P', cursive;
+}
+
+h2{
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+}
+
+.games{
+  text-transform: uppercase;
+  margin-bottom: 10px;
+
+}
+
+.main-details {
+  column-count: 2; 
+  column-gap: 20px;
+}
 
 #bottomDiv {
 display: flex;

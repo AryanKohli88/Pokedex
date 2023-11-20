@@ -44,15 +44,15 @@
         <div class="right">
             <h2><%= pokemon  %></h2>
             <div class="main-details">
-                <h1>Types</h1>
+                <h1>Pokemon Type</h1>
                 <% type.forEach(function (item, index) { %>     
                     <button style="background-color: <%= mapTypeToColor(item["type"]["name"]) %>" ><%= item["type"]["name"] %> </button>
                 <% })%>                
             </div>
+            <h1>Games where you can find <%= pokemon %> : </h1>
             <div class="main-details">
-                <h1>Games were you can find <%= pokemon %> : </h1>
                 <% ingames.forEach(function (item, index) { %>     
-                    <pre><%= item["version"]["name"] %> </pre>
+                  <div class="games">  <pre><%= item["version"]["name"] %> </pre> </div>
                 <% })%>                
             </div>
         </div>
