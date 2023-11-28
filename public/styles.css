@@ -60,3 +60,8 @@ align-items: center;
 .right{
   flex: 2;   
 }
+
+.image{
+  margin-top: 10%;
+  scale: 1.5;
+}
