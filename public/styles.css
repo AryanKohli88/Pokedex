@@ -28,7 +28,8 @@ h2{
 }
 
 #bottomDiv {
-display: flex;
+/* display: flex; */
+margin-top: 1vh;
 background-color: white; 
 border: 4px solid red; 
 border-radius: 20px; 
@@ -37,12 +38,7 @@ padding: 20px;
 }  
 
 .left {
-  /* margin: auto;
-  flex: 1;
-  display: flex;
-  justify-content: center; */
   width: 30vw;
-  /* margin: auto; */
   display: flex;
   flex-direction: column;
 }
