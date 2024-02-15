@@ -50,6 +50,7 @@ app.get("/info", async (req, res)=>{
         bcolor = mapTypeToColor(colortype);
         games = response.data.game_indices;
         num = response.data.id;
+        // use Open AI API to display info on popup window
         qtn1 = "https://www.google.com/search?q=when+did+" + pok + "+first+appear+in+pokemon+anime&oq=when+did+pikachu+first+appear+in+pokemon+anime";
         qtn2 = "https://www.google.com/search?q=who+was+the+first+trainer+shown+to+own+" + pok +"+in+anime&oq=who+was+the+first+trainer+shown+to+own+pikachu+in+anime";
         qtn3 = "https://www.google.com/search?q=what+are+future+and+past+evolutions+of+" + pok;
