@@ -9,19 +9,18 @@ function Card(){
     return <div>
         <div class="up">
             <div class="left">
-                {/* <h2>Pokedex #<%=id%></h2> */}
                 <Image />
                 <Type />
             </div>
             <div class="right">
-            <FoundInGames />
+                <FoundInGames />
             </div>
             <div class="right-animation">
-            <Animation />
+                <Animation />
             </div>
         </div>
         <div class="down">
-        <KnowMore />
+            <KnowMore />
         </div>          
     </div>
 }

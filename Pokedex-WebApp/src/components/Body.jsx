@@ -3,7 +3,7 @@ import Card from "./Card.jsx"
 function Body() {
   const year = new Date().getFullYear();
   return (
-    <div>
+    <div className="Card">
       <Card />
     </div>
   );
