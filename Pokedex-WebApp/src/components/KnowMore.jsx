@@ -1,7 +1,9 @@
 import React from "react";
+import Evolution from './Evolution.jsx'
 function KnowMore(){
     return <div>
-        Found in these games
+        <Evolution />
+        External links
     </div>
 }
 

@@ -1,14 +1,28 @@
 import React from "react";
 import Image from "./Image.jsx"
+import Type from "./Type.jsx"
 import FoundInGames from "./FoundInGames.jsx"
+import Animation from "./Animation.jsx"
 import Evolution from "./Evolution.jsx"
 import KnowMore from "./KnowMore.jsx"
 function Card(){
     return <div>
-        <Image />
-        <FoundInGames />
-        <Evolution />
+        <div class="up">
+            <div class="left">
+                {/* <h2>Pokedex #<%=id%></h2> */}
+                <Image />
+                <Type />
+            </div>
+            <div class="right">
+            <FoundInGames />
+            </div>
+            <div class="right-animation">
+            <Animation />
+            </div>
+        </div>
+        <div class="down">
         <KnowMore />
+        </div>          
     </div>
 }
 

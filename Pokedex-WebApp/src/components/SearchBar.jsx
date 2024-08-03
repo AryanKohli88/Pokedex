@@ -4,7 +4,7 @@ function SearchBar() {
   const year = new Date().getFullYear();
   return (
     <div>
-        <p>Search for a Pokemon</p>
+        <p class="searchLabel">Search for a Pokemon</p>
         <form action="/submit" method="POST" class="form" id="pokemonForm"> 
          <label>Name: </label>
         <input placeholder="Name of the pokemon..." type="text" name="pokemon" class="text-box" required/>
