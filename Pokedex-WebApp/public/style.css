@@ -148,6 +148,8 @@ padding: 20px;
   align-items: center;     /* Centers items vertically, if needed */
   flex-wrap: wrap;         /* Allows items to wrap to the next line if they overflow */
   gap: 10px;               /* Adds space between buttons, adjust as needed */
+  width: 100%;
+  height: auto;
 }
 
 .type{
@@ -162,4 +164,11 @@ padding: 20px;
 /* Optional: Add a hover effect */
 .type button:hover {
   background-color: darkgrey; /* Change to your preferred hover color */
+}
+
+.button{
+  position: fixed;
+  top: 3vw; /* Adjust this value to your desired distance from the top */
+  right: 10px; /* Adjust this value to your desired distance from the right */
+  z-index: 1000; /* Ensure it stays above other elements */
 }

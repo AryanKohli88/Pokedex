@@ -1,17 +1,51 @@
 import React from "react";
 
-function Type() {
+function Type(props) {
+  const typeColors = {
+    normal: 'gray',
+    fire: 'orangered',
+    water: 'lightblue',
+    grass: 'green',
+    fighting: 'red',
+    flying: 'skyblue',
+    poison: 'rgb(210, 20, 102)', // MAKE ALL LIKE THIS ONLY
+    ground: 'saddlebrown',
+    rock: 'sienna',
+    bug: 'green',
+    ghost: 'indigo',
+    steel: 'slategray',
+    electric: 'yellow',
+    psychic: 'lightpink',
+    ice: 'lightcyan',
+    dragon: 'darkslateblue',
+    dark: 'darkslategray',
+    fairy: 'pink'
+};
+  let type;
+  if(props.data)
+  {
+    type = props.data.types;
+    type.forEach(element => {
+      console.log(element["type"]["name"]);
+    });
+  }
+  else{
+    type = "No Pokemon"
+  }
   return (
-    <div className="type">
-        {/* Type */}
-        {/* <% type.forEach(function (item, index) { %>     
-            <button style="background-color: <%= mapTypeToColor(item["type"]["name"]) %>" ><%= item["type"]["name"] %> </button>
-        <% })%>   */}
-        {/* Button will have bg colour of the type */}
-        <button> Type 1</button>
-        <button> Type 2</button>
-        </div>
+<div>
+ <button style={{backgroundColor: "lightblue"}} >
+      water
+    </button> 
+  </div>
   );
 }
-
+// <div className="type">
+//   {( type.length > 0) ? (type.forEach(element => {
+//   (<button style={{ backgroundColor: typeColors[element] }}>
+//         {element}
+//       </button>
+//     )}
+//   )) : (<p>No Pokémon</p>)}
+//   </div>
 export default Type;
