@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose  from "mongoose";
+
 const teamschema = mongoose.Schema({
     team_id:{
         type: mongoose.Schema.Types.ObjectId,
@@ -10,11 +11,11 @@ const teamschema = mongoose.Schema({
         required: [true, "Please add"],
     },
     pokemonArray: {
-        type: String,
+        type: [Number],
         required: [true, "Please add"],
     }
 },{
     timestamps: true,
 });
 
-module.exports = mongoose.model("Contact", teamschema);
+export default mongoose.model("Contact", teamschema);
