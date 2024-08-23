@@ -3,6 +3,9 @@ import React from "react";
 function Image(props) {
   // let p_id = -1;
   // p_id = props.id; 
+  if(!props.exists){
+    return (<div>Please check spelling</div>)
+  }
   let url; // = 
   if(props.id === -1) {
     url =  "../../public/placeholder_image.jpeg"

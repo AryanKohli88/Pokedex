@@ -32,20 +32,28 @@ function Type(props) {
   else{
     type = "No Pokemon"
   }
-  return (
-<div>
- <button style={{backgroundColor: "lightblue"}} >
-      water
-    </button> 
-  </div>
+  let typeButtons;
+  if (props.data && props.data.types && props.exists) {
+    typeButtons = props.data.types.map((element, index) => {
+      const typeName = element.type.name;
+      const backgroundColor = typeColors[typeName] || 'gray'; // Default to 'gray' if type not found
+
+      return (
+        <button
+          key={index}
+          style={{ backgroundColor, color: 'black', margin: '5px', border: 'none', padding: '10px', borderRadius: '5px' }}
+        >
+          {typeName}
+        </button>
+      );
+    });
+  } else {
+    typeButtons = <p>No Pokemon Found</p>;
+  }
+
+return (
+<div>{typeButtons}</div>
   );
 }
-// <div className="type">
-//   {( type.length > 0) ? (type.forEach(element => {
-//   (<button style={{ backgroundColor: typeColors[element] }}>
-//         {element}
-//       </button>
-//     )}
-//   )) : (<p>No Pokémon</p>)}
-//   </div>
+
 export default Type;

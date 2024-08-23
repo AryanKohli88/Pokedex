@@ -1,9 +1,8 @@
 import React from "react";
 import Evolution from './Evolution.jsx'
-function KnowMore(){
+function KnowMore(props){
     return <div>
-        <Evolution />
-        External links
+        <Evolution name={props.name} exists={props.exists} />
     </div>
 }
 

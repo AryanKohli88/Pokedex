@@ -1,7 +1,12 @@
 import React from "react";
-
+import {useNavigate} from 'react-router-dom';
 function SearchBar(props) {
   const year = new Date().getFullYear();
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/login');
+  };
 
   return (
     <div>
@@ -10,8 +15,8 @@ function SearchBar(props) {
          <label>Name: </label>
         <input placeholder="Name of the pokemon..." type="text" name="pokemon" className="text-box" required/>
         <input type="submit" className="btn" onClick={props.getPokemon}  required/>
-        <button name="login" className="button"> Login </button>
     </form>
+        <button name="login" className="button" onClick={handleClick}> Login </button>
     </div>
   );
 }

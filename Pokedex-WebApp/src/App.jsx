@@ -10,7 +10,6 @@
 
   import axios from "axios"
 
-
   const getInfo = async (ip)=>{
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ip}`);
     return response;
@@ -26,7 +25,7 @@
       event.preventDefault();
       const form = event.target.closest('form');
       
-      const name = form.querySelector('input[name="pokemon"]').value.toLowerCase();;
+      const name = form.querySelector('input[name="pokemon"]').value.toLowerCase();
       setpokemonName(name)
 
       try{

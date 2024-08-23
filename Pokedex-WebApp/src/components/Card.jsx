@@ -14,33 +14,35 @@ function Card(props){
     //     response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ip}`);
     // }
 
+    let exists = false;
     const data = props.pokemonData;
     let id = -1;
     if(data)
     {
         console.log(data.id);
         id = data.id;
+        exists = true;
     }
     else
     console.log("No data")
     
-    // console.log(`ID ::  ${data.id}`);
     return <div>
         
         <div className="up">
             <div className="left">
-                <Image id={id}/> 
-                <Type data={data}/>
+                <Image id={id} exists={exists}/> 
+                <Type data={data} exists={exists}/>
             </div>
             <div className="right">
-                <FoundInGames />
+                <b>List of Games:</b>
+                <FoundInGames data={data} exists={exists}/>
             </div>
             <div className="right-animation">
-                <Animation />
+                <Animation pok_name={props.pokemonName} exists={exists}/>
             </div>
         </div>
         <div className="down">
-            <KnowMore />
+            <KnowMore name={props.pokemonName} exists={exists} />
         </div>          
     </div>
 }
