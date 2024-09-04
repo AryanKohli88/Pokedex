@@ -21,4 +21,4 @@ const userschema = mongoose.Schema({
     }
 );
 
-export default mongoose.model("User", userschema);
+export default mongoose.model("Trainer", userschema);

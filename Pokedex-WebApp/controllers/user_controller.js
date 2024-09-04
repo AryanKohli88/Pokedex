@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import user from '../models/usermodel.js'
+import dotenv from 'dotenv'
+dotenv.config();
 //@desc get all contacts
 //@route GET /api/users
 //@access public 
@@ -31,8 +33,6 @@ const Reguser = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("User data is not valid");
     }
-
-    res.json({message: "Register the user"});
 });
 
 //@access public 
@@ -40,7 +40,7 @@ const Loginuser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     if(!email || !password){
         res.status(400);
-        throw new Error("All fiels important");
+        throw new Error("All fiedls important");
     }
 
     const userobject = await user.findOne({email});

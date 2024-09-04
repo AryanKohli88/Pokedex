@@ -1,16 +1,17 @@
 import asyncHandler from 'express-async-handler'
 import Team from '../models/teammodel.js'
 // const Contact = require("../models/ContactModel");
-//@desc get all contacts
-//@route GET /api/contacts
+//@desc get all teams
+//@route GET /api/team
 //@access private 
 const getTeams = asyncHandler(async(req,res)=> {
-    const teams = await Contact.find({user_id: req.user.id});
+    console.log('finding for '+ req.user.id);
+    const teams = await Team.find({user_id: req.user.id});
     res.status(200).json(teams);
 });
 
-//@desc Create new contact
-//@route POST /api/contacts
+//@desc Create new team
+//@route POST /api/team
 //@access private 
 const createTeam = asyncHandler(async(req,res)=> {
     // console.log(" body is : ",req.body);
@@ -22,12 +23,12 @@ const createTeam = asyncHandler(async(req,res)=> {
     const team = await Team.create({
         team_name, pokemonArray, user_id: req.user.id
     });
-    res.status(201).json(contact);
+    res.status(201).json(team);
 });
 
 
-//@desc Update a contact
-//@route PUT /api/contacts/:id
+//@desc Update a team
+//@route PUT /api/team/:id
 //@access private
 const updateTeam = asyncHandler(async(req,res)=> {
     const team = await Team.findById(req.params.id);
@@ -38,7 +39,7 @@ const updateTeam = asyncHandler(async(req,res)=> {
 
     if(team.user_id.toString() !== req.user.id){
         res.status(403);
-        throw new Error("you can not update other user's contacts");
+        throw new Error("you can not update other user's teams");
     }
 
     const updatedTeam = await Team.findByIdAndUpdate(
@@ -49,20 +50,21 @@ const updateTeam = asyncHandler(async(req,res)=> {
 res.status(200).json(updatedTeam);
 });
 
-//@desc get indv contact
-//@route delete /api/contacts/:id
+//@desc get indv team
+//@route delete /api/team/:id
 //@access private 
 const getTeam = asyncHandler(async(req,res)=> {
+    console.log()
     const team = await Team.findById(req.params.id);
     if(!team){
         res.status(404);
-        throw new Error("Contact not found");
+        throw new Error("Team not found");
     }
     res.status(200).json(team);
 });
 
-//@desc Create new contact
-//@route individual contact /api/contacts
+//@desc Create new team
+//@route individual team /api/team
 //@access private
 const deleteTeam = asyncHandler(async(req,res)=> {
     const team = await Team.findById(req.params.id);
@@ -79,7 +81,7 @@ const deleteTeam = asyncHandler(async(req,res)=> {
 
 
     await Team.deleteOne({_id: req.params.id});
-    res.status(200).json(contact);
+    res.status(200).json(team);
 });
 
 export default {getTeams, createTeam,deleteTeam,updateTeam,getTeam};

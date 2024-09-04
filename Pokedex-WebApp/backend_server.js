@@ -5,10 +5,17 @@ import connectDb from './config/dbconnection.js';
 import errorHandelder from './middleware/errorhandeler.js';
 import TeamRoutes from './routes/team_routes.js'
 import UserRoutes from './routes/user_routes.js'
+import cors from 'cors';
 const app = express();
 const port = process.env.PORT || 5000;
 
 connectDb();
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Enable cookies and other credentials
+  }));  
 
 app.use(express.json());
 app.use(errorHandelder);
@@ -21,5 +28,5 @@ app.listen(port, () => {
     console.log(`Serever running on port ${port}` );
 });
 
-// TOFIX
-// still saving in old database, shift to new one 
+// TO
+//  userprofile page.

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState }  from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+// import {useNavigate} from 'react-router-dom';
 
+// const navigate = useNavigate();
+// const handleClick = () => {
+//   navigate('/signup');
+// };
 function LoginPage() {
   // Define styles
+  const [email, setemail] = useState('');
+  const [password, setPassword] = useState('');
+  // Initialize navigate function
+  const navigate = useNavigate();
+
   const pageStyle = {
     backgroundColor: 'red',
     height: '100vh',
@@ -43,14 +55,47 @@ function LoginPage() {
     width: '100%', // Full width of the box
   };
 
+  const handleLogin = async () => {
+    console.log('email:', email);
+    console.log('Password:', password);
+    try {
+      const response = await fetch('http://localhost:5000/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      const { accessToken } = data;
+
+      if (accessToken) {
+        // Store the access token in a cookie
+        Cookies.set('accessToken', accessToken, { expires: 1 }); // Expires in 1 day
+        console.log('Access Token:', accessToken);
+        // Optionally, redirect the user or perform further actions
+        navigate('/userprofile');
+      } else {
+        console.error('No access token received');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
   return (
     <div style={pageStyle}>
       <div style={boxStyle}>
         <h2>Login</h2>
-        <input type="text" placeholder="Username" style={inputStyle} />
-        <input type="passwcord" placeholder="Password" style={inputStyle} />
-        <button type="submit" style={buttonStyle}>Login</button>
-        <a href="#">New User?</a>
+        <input type="text" placeholder="email" value={email} onChange={(e) => setemail(e.target.value)} style={inputStyle} />
+        <input type="passwcord" placeholder="Password" value={password} style={inputStyle} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit"onClick={handleLogin} style={buttonStyle}>Login</button>
+        <Link to="/signup">New User?</Link>
       </div>
     </div>
   );

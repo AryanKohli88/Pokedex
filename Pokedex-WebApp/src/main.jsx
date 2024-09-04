@@ -23,11 +23,10 @@ const router = createBrowserRouter([
     element: <div><SignUpPage /></div>
   },
   {
-    path: "/user/:id",
+    path: "/userprofile",
     element: <div><UserProfile /></div>
   }
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

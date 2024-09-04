@@ -1,7 +1,7 @@
 import mongoose  from "mongoose";
 
 const teamschema = mongoose.Schema({
-    team_id:{
+    user_id:{
         type: mongoose.Schema.Types.ObjectId,
         require: true,
         ref: "User",
@@ -18,4 +18,4 @@ const teamschema = mongoose.Schema({
     timestamps: true,
 });
 
-export default mongoose.model("Contact", teamschema);
+export default mongoose.model("Team", teamschema);
