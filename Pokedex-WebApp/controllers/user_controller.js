@@ -40,7 +40,7 @@ const Loginuser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     if(!email || !password){
         res.status(400);
-        throw new Error("All fiedls important");
+        throw new Error("All fields important");
     }
 
     const userobject = await user.findOne({email});

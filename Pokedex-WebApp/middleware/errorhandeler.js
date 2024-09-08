@@ -19,5 +19,6 @@ const errorHandelder = (err, req,res,next) => {
         break;
         default: console.log("No error");
     }
+    // next();
 };
 export default errorHandelder;
