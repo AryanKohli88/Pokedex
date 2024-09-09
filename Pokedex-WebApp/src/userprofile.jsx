@@ -1,48 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import TopBar from './components/TopBar';
+// import TopBar from './components/TopBar.jsx'
+import UserProfilePic from './components/profilepic'
 
 function UserProfile() {
   const [user, setUser] = useState(null);
   const [teams, setTeams] = useState([]);
+  const [pokemonNames, setPokemonNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Get the access token from cookies
         const accessToken = Cookies.get('accessToken');
         if (!accessToken) {
           throw new Error('No access token found');
         }
-        console.log(`accessToken is ${accessToken}`);
+
+        // Fetch user profile
         const userResponse = await fetch('http://localhost:5000/api/user/current/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-
         if (!userResponse.ok) {
           throw new Error('Failed to fetch user profile');
         }
-
         const userData = await userResponse.json();
         setUser(userData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
 
-    const fetchTeams = async () => {
-      try {
-        const accessToken = Cookies.get('accessToken');
-        if (!accessToken) {
-          throw new Error('No access token found');
-        }
-        console.log("trying");
+        // Fetch teams
         const teamsResponse = await fetch('http://localhost:5000/api/team/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -52,13 +41,20 @@ function UserProfile() {
           throw new Error('Failed to fetch user teams');
         }
         const teamsData = await teamsResponse.json();
-        console.log(teamsData);
-        teamsData.map((team)=>{
-          team.pokemonArray.map((entry) => {
-            const name = fetchnames(entry);
-            entry = name;
-          })
-        })
+
+        // Create a 2D array to store Pokémon names
+        const fetchPokemonNames = async () => {
+          const names = await Promise.all(teamsData.map(async (team) => {
+            const pokemonNamesPromises = team.pokemonArray.map(async (entry) => {
+              const name = await fetchnames(entry);
+              return name;
+            });
+            return Promise.all(pokemonNamesPromises);
+          }));
+          setPokemonNames(names);
+        };
+
+        await fetchPokemonNames();
         setTeams(teamsData);
       } catch (error) {
         setError(error.message);
@@ -67,26 +63,20 @@ function UserProfile() {
       }
     };
 
-    // WUT WRONG HERE??
-
     const fetchnames = async (entry) => {
-      try{
+      try {
         const info = await fetch(`https://pokeapi.co/api/v2/pokemon/${entry}`);
-        const  infojson = info.json();
-        // const { response } = info;
-        console.log(infojson[PromiseResult]);
-        // const n = infojson["forms"];
-        // console.log(n);
-        // return n;
+        if (!info.ok) throw new Error('Failed to fetch Pokémon name');
+        const infojson = await info.json();
+        return infojson.forms[0].name;
       } catch (e) {
         console.log(e);
-        setError(error)
-      } finally {
-        setLoading(false)
+        setError(e.message);
+        return 'Unknown';
       }
-    }
+    };
+
     fetchData();
-    fetchTeams();
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -94,6 +84,11 @@ function UserProfile() {
 
   return (
     <div>
+      <TopBar />
+      {/* <UserAndTeamsDetails />  */}
+      {/* only add and delete teams */}
+      <UserProfilePic /> 
+      {/* <LogoutAndDeleteUserProfile /> */}
       <h1>User Profile</h1>
       {user && (
         <div>
@@ -104,12 +99,12 @@ function UserProfile() {
       <h2>User Teams</h2>
       {teams.length > 0 ? (
         <ul>
-          {teams.map((team) => (
+          {teams.map((team, teamIndex) => (
             <li key={team._id}>
               <h3>Team Name: {team.team_name}</h3>
               <ul>
-                {team.pokemonArray.map((pokedexEntry) => (
-                  <li key={pokedexEntry}>{pokedexEntry}</li>
+                {pokemonNames[teamIndex]?.map((name, pokedexIndex) => (
+                  <li key={pokedexIndex}>{name}</li>
                 ))}
               </ul>
             </li>
