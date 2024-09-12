@@ -53,7 +53,7 @@ function AddTeam(props) {
       };
 
       // Send the team data to the server
-      const response = await fetch('http://localhost:5000/api/team/', {
+      const response = await fetch('https://pokedex-backend.onrender.com/api/team/', {
         method: 'POST',
         headers: {
           "Content-Type": 'application/json',

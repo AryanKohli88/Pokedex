@@ -47,7 +47,7 @@ function UserAndTeamsDetails(props) {
       throw new Error('No access token found');
     }
     try {
-      await fetch(`http://localhost:5000/api/team/${teamId}`, {  // Adjust the endpoint as needed
+      await fetch(`https://pokedex-backend.onrender.com/api/team/${teamId}`, {  // Adjust the endpoint as needed
         method: 'DELETE',
         headers: {
           "Authorization": `Bearer ${accessToken}`,

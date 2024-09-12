@@ -33,7 +33,7 @@ function UserProfile() {
         }
 
         // Fetch user profile
-        const userResponse = await fetch('http://localhost:5000/api/user/current/', {
+        const userResponse = await fetch('https://pokedex-backend.onrender.com/api/user/current/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -45,7 +45,7 @@ function UserProfile() {
         setUser(userData);
 
         // Fetch teams
-        const teamsResponse = await fetch('http://localhost:5000/api/team/', {
+        const teamsResponse = await fetch('https://pokedex-backend.onrender.com/api/team/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
