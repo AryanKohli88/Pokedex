@@ -3,6 +3,32 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.login-btn {
+  position: fixed;
+  top: 5vw; /* Adjust this value to your desired distance from the top */
+  right: 30px; /* Adjust this value to your desired distance from the right */
+  /* z-index: 1000; Ensure it stays above other elements */
+  background-color: orange;  /* Set background color to orange */
+  border: 100px black solid;
+  border: none;  /* Remove default border */
+  color: white;  /* Set text color to white */
+  padding: 15px;
+  /* text-align: center;  Center text */
+  text-decoration: none;  /* Remove underline from text */
+  display: inline-block;  /* Ensure the button stays inline */
+  font-size: 20px;  /* Increase font size */
+  border-radius: 90%;  /* Make the button circular */
+  cursor: pointer;  /* Add pointer cursor on hover */
+  transition: 0.3s;  /* Add transition for smooth hover effect */
+}
+
+.login-btn:hover {
+  background-color: darkorange;  /* Slightly darker color on hover */
+  transform: scale(1.5);  /* Enlarge button slightly on hover */
+}
+
+
 html {
   font-family: "Montserrat", sans-serif;
 }
@@ -28,7 +54,7 @@ footer p {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 } 
 
-topbar h1 {
+upperbar h1 {
   color: #fff;
   font-family: "McLaren", cursive;
   font-weight: 200;

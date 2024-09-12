@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import TopBar from './components/TopBar';
-// import TopBar from './components/TopBar.jsx'
-import UserProfilePic from './components/profilepic'
+import UserProfilePic from './components/profilepic';
+import UserAndTeamsDetails from './components/teamsdetails';
+import { useNavigate } from 'react-router-dom';
+
+/*
+  TODO
+  fix new user reg.
+  test
+  deploy
+  update cv and apply Amex
+  fix handel add and remove teams (UI part)
+  good coding standards
+*/
+
 
 function UserProfile() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [teams, setTeams] = useState([]);
   const [pokemonNames, setPokemonNames] = useState([]);
@@ -41,13 +54,19 @@ function UserProfile() {
           throw new Error('Failed to fetch user teams');
         }
         const teamsData = await teamsResponse.json();
+        setTeams(teamsData);
 
-        // Create a 2D array to store Pokémon names
+        // Fetch Pokémon names
         const fetchPokemonNames = async () => {
           const names = await Promise.all(teamsData.map(async (team) => {
             const pokemonNamesPromises = team.pokemonArray.map(async (entry) => {
-              const name = await fetchnames(entry);
-              return name;
+              try {
+                const name = await fetchnames(entry);
+                return name;
+              } catch (error) {
+                console.error(`Failed to fetch name for Pokémon entry ${entry}:`, error.message);
+                return 'Unknown';
+              }
             });
             return Promise.all(pokemonNamesPromises);
           }));
@@ -55,7 +74,6 @@ function UserProfile() {
         };
 
         await fetchPokemonNames();
-        setTeams(teamsData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -79,40 +97,51 @@ function UserProfile() {
     fetchData();
   }, []);
 
+  const handleAddTeam = async (newTeam) => {
+    setTeams((prevTeams) => [...prevTeams, newTeam]);
+  };
+
+  const handleRemoveTeam = async (teamId) => {
+    setTeams(teams.filter(team => team._id !== teamId));
+    // team name is changing but not the conten (pokemon list), same when adding a team.
+  }
+
+  const handleLogout = () => {
+    Cookies.remove('accessToken'); // Clear the token
+    navigate('/login'); // Redirect to login page
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
       <TopBar />
-      {/* <UserAndTeamsDetails />  */}
-      {/* only add and delete teams */}
-      <UserProfilePic /> 
-      {/* <LogoutAndDeleteUserProfile /> */}
-      <h1>User Profile</h1>
-      {user && (
-        <div>
-          <h2>Username: {user.username}</h2>
-          <h3>Email: {user.email}</h3>
-        </div>
-      )}
-      <h2>User Teams</h2>
-      {teams.length > 0 ? (
-        <ul>
-          {teams.map((team, teamIndex) => (
-            <li key={team._id}>
-              <h3>Team Name: {team.team_name}</h3>
-              <ul>
-                {pokemonNames[teamIndex]?.map((name, pokedexIndex) => (
-                  <li key={pokedexIndex}>{name}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>No teams found</div>
-      )}
+      {/* <button onClick={handleLogout} style={{ padding: '10px', borderRadius: '5px', border: 'none', backgroundColor: '#dc3545', color: 'white', cursor: 'pointer', }}> */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+        <button
+          onClick={handleLogout}
+          style={{
+            padding: '10px',
+            borderRadius: '5px',
+            border: 'none',
+            backgroundColor: '#dc3545',
+            color: 'white',
+            cursor: 'pointer',
+          }}
+        >
+          Logout
+        </button>
+      </div>
+      {/* </button> */}
+      <UserAndTeamsDetails 
+        user={user} 
+        teams={teams} 
+        pokemonNames={pokemonNames} 
+        onAddTeam={handleAddTeam}
+        onRemoveTeam={handleRemoveTeam}
+      />
+      <UserProfilePic />
     </div>
   );
 }

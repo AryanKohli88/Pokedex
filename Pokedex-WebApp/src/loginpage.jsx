@@ -1,12 +1,7 @@
 import React, { useState }  from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-// import {useNavigate} from 'react-router-dom';
 
-// const navigate = useNavigate();
-// const handleClick = () => {
-//   navigate('/signup');
-// };
 function LoginPage() {
   // Define styles
   const [email, setemail] = useState('');
@@ -55,6 +50,17 @@ function LoginPage() {
     width: '100%', // Full width of the box
   };
 
+  const instructionsBoxStyle = {
+    backgroundColor: '#f8f9fa',
+    border: '2px solid black',
+    borderRadius: '5px',
+    padding: '15px',
+    textAlign: 'center',
+    fontSize: '14px',
+    color: '#333',
+    // width: '10%', // Ensure it takes full width of the container
+  };
+
   const handleLogin = async () => {
     console.log('email:', email);
     console.log('Password:', password);
@@ -67,6 +73,10 @@ function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
+      if (response.status === 401) {
+        alert('Invalid Credentials!');
+        throw new Error('Login failed');
+      }
       if (!response.ok) {
         throw new Error('Login failed');
       }
@@ -93,9 +103,12 @@ function LoginPage() {
       <div style={boxStyle}>
         <h2>Login</h2>
         <input type="text" placeholder="email" value={email} onChange={(e) => setemail(e.target.value)} style={inputStyle} />
-        <input type="passwcord" placeholder="Password" value={password} style={inputStyle} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} style={inputStyle} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit"onClick={handleLogin} style={buttonStyle}>Login</button>
         <Link to="/signup">New User?</Link>
+      <div style={instructionsBoxStyle}>
+          <p>Test User email: red@gmail.com <br/> Test User password: redpassword  </p>
+        </div>
       </div>
     </div>
   );

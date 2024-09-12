@@ -16,7 +16,7 @@ function SearchBar(props) {
         <input placeholder="Name of the pokemon..." type="text" name="pokemon" className="text-box" required/>
         <input type="submit" className="btn" onClick={props.getPokemon}  required/>
     </form>
-        <button name="login" className="button" onClick={handleClick}> Login </button>
+        <button name="login" className="login-btn" onClick={handleClick}> Login </button>
     </div>
   );
 }

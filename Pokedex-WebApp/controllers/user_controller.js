@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import user from '../models/usermodel.js'
 import dotenv from 'dotenv'
 dotenv.config();
-//@desc get all contacts
 //@route GET /api/users
 //@access public 
 const Reguser = asyncHandler(async (req, res) => {
@@ -28,7 +27,19 @@ const Reguser = asyncHandler(async (req, res) => {
     });
     console.log(`User created ${userobject}`);
     if(userobject){
-        res.status(201).json({_id: userobject.id, email: userobject.email});
+        const accessToken = jwt.sign(
+            {
+                user: {
+                    username: userobject.username,
+                    email: userobject.email,
+                    id: userobject.id,
+                },
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "15m" }
+        );
+
+        res.status(201).json({_id: userobject.id, email: userobject.email, accessToken});
     } else{
         res.status(400);
         throw new Error("User data is not valid");
