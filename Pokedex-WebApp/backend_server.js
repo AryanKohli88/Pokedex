@@ -24,7 +24,7 @@ app.use('/api/user', UserRoutes)
 app.get('/', (req,res) =>{
     res.send("hi");
 })
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Serever running on port ${port}` );
 });
 
